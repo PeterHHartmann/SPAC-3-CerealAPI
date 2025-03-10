@@ -27,8 +27,8 @@ class Manufacturer(Model):
 
 class ThermalType(Model):
     class ThermalChoices(TextChoices):
-        COLD = 'C', _("Hot")
-        HOT = 'H', _("Cold")
+        COLD = 'C'
+        HOT = 'H'
         
     id = UUIDField(
             primary_key=True, 
