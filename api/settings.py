@@ -1,3 +1,10 @@
+from dotenv import dotenv_values
+
+dotenv_config = dotenv_values(".env")
+
+# print(dotenv_config)
+print(dotenv_config.get("POSTGRES_DB"))
+
 """
 Django settings for api project.
 
@@ -76,8 +83,12 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": dotenv_config.get("POSTGRES_DB"),
+        "USER": dotenv_config.get("POSTGRES_USER"),
+        "PASSWORD": dotenv_config.get("POSTGRES_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
 
