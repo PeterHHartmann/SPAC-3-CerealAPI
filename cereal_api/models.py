@@ -5,6 +5,7 @@ from django.db.models import (
     TextChoices,
     UUIDField,
     ForeignKey,
+    IntegerField,
     OneToOneField,
     CASCADE,
     PositiveIntegerField,
@@ -25,7 +26,9 @@ class Manufacturer(Model):
 
     id = UUIDField(primary_key=True, default=uuid4, editable=False)
 
-    code = CharField(max_length=1, choices=ManufacturerChoices.choices, null=False)
+    code = CharField(
+        max_length=1, choices=ManufacturerChoices.choices, unique=True, null=False
+    )
 
 
 class ThermalType(Model):
@@ -44,20 +47,20 @@ class ThermalType(Model):
 
 
 class Cereal(Model):
-    name = CharField(max_length=255)
-    mfr = ForeignKey(Manufacturer, on_delete=CASCADE)
-    thermal_type = ForeignKey(ThermalType, on_delete=CASCADE)
-    calories = PositiveIntegerField(null=False)
-    protein = PositiveIntegerField(null=False)
-    fat = PositiveIntegerField(null=False)
-    sodium = PositiveIntegerField(null=False)
+    id = UUIDField(primary_key=True, default=uuid4, editable=False)
+    name = CharField(max_length=255, unique=True, null=False)
+    mfr = ForeignKey(Manufacturer, on_delete=CASCADE, null=False)
+    thermal_type = ForeignKey(ThermalType, on_delete=CASCADE, null=False)
+    calories = IntegerField(null=False)
+    protein = IntegerField(null=False)
+    fat = IntegerField(null=False)
+    sodium = IntegerField(null=False)
     fiber = FloatField(null=False)
     carbo = FloatField(null=False)
-    sugars = PositiveIntegerField(null=False)
-    potass = PositiveIntegerField(null=False)
-    vitamins = PositiveIntegerField(null=False)
-    shelf = PositiveIntegerField(
-        null=False, validators=[MaxValueValidator(3), MinValueValidator(1)]
-    )
+    sugars = IntegerField(null=False)
+    potass = IntegerField(null=False)
+    vitamins = IntegerField(null=False)
+    shelf = IntegerField(null=False)
     weight = FloatField(null=False)
     cups = FloatField(null=False)
+    rating = CharField(max_length=255, null=False)
