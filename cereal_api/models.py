@@ -45,17 +45,8 @@ class ThermalType(Model):
 
 class Cereal(Model):
     name = CharField(max_length=255)
-    mfd = ForeignKey(Manufacturer, on_delete=CASCADE)
-    type = ForeignKey(ThermalType, on_delete=CASCADE)
-    shelf = PositiveIntegerField(
-        null=False, validators=[MaxValueValidator(3), MinValueValidator(1)]
-    )
-    weight = FloatField(null=False)
-    cups = FloatField(null=False)
-
-
-class Nutrition(Model):
-    cereal = OneToOneField(Cereal, on_delete=CASCADE, primary_key=True)
+    mfr = ForeignKey(Manufacturer, on_delete=CASCADE)
+    thermal_type = ForeignKey(ThermalType, on_delete=CASCADE)
     calories = PositiveIntegerField(null=False)
     protein = PositiveIntegerField(null=False)
     fat = PositiveIntegerField(null=False)
@@ -65,3 +56,8 @@ class Nutrition(Model):
     sugars = PositiveIntegerField(null=False)
     potass = PositiveIntegerField(null=False)
     vitamins = PositiveIntegerField(null=False)
+    shelf = PositiveIntegerField(
+        null=False, validators=[MaxValueValidator(3), MinValueValidator(1)]
+    )
+    weight = FloatField(null=False)
+    cups = FloatField(null=False)
