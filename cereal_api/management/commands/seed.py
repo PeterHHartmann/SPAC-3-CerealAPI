@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 import pandas
 from cereal_api.models import Cereal, Manufacturer, ThermalType
+from django.db.utils import IntegrityError
 
 
 class Command(BaseCommand):
@@ -54,5 +55,7 @@ class Command(BaseCommand):
                     cups=cups,
                     rating=rating,
                 )
+            except IntegrityError:
+                self.stderr.write(f"Skipping - Cereal: {name} already exists")
             except Exception as e:
                 self.stderr.write(f"Something went wrong: {e}")
