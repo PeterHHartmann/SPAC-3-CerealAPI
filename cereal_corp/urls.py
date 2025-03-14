@@ -21,9 +21,9 @@ from rest_framework import routers
 from cereal_api import views
 
 router = routers.DefaultRouter()
-router.register(r"cereals", views.CerealViewSet)
-router.register(r"manufacturers", views.ManufacturerViewSet)
-router.register(r"types", views.ThermalTypeViewSet)
+router.register(r"cereal", views.CerealViewSet)
+router.register(r"manufacturer", views.ManufacturerViewSet)
+router.register(r"thermaltype", views.ThermalTypeViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

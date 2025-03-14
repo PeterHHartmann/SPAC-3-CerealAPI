@@ -30,6 +30,9 @@ class Manufacturer(Model):
         max_length=1, choices=ManufacturerChoices.choices, unique=True, null=False
     )
 
+    def __str__(self):
+        return self.code
+
 
 class ThermalType(Model):
     class ThermalChoices(TextChoices):
@@ -42,15 +45,20 @@ class ThermalType(Model):
         choices=ThermalChoices.choices,
         default=ThermalChoices.COLD,
         unique=True,
-        null=False,
+        null=False
     )
+
+    def __str__(self):
+        # name = [thermal_code for thermal_code, _ in ThermalType.ThermalChoices.choices if thermal_code = self.code]
+        self.ThermalChoices.choices
+        return self.code
 
 
 class Cereal(Model):
     id = UUIDField(primary_key=True, default=uuid4, editable=False)
     name = CharField(max_length=255, unique=True, null=False)
-    mfr = ForeignKey(Manufacturer, on_delete=CASCADE, null=False)
-    thermal_type = ForeignKey(ThermalType, on_delete=CASCADE, null=False)
+    mfr = ForeignKey(Manufacturer, on_delete=CASCADE, null=False, editable=True)
+    thermal_type = ForeignKey(ThermalType, on_delete=CASCADE, null=False, editable=True)
     calories = IntegerField(null=False)
     protein = IntegerField(null=False)
     fat = IntegerField(null=False)
