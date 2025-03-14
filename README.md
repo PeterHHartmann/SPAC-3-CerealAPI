@@ -1,4 +1,4 @@
-# SPAC-cereal-API
+# SPAC - Cereal API
 A REST API serving information on cereals - an exercise in CRUD, API auth and database management.
 
 This project is developed using 
