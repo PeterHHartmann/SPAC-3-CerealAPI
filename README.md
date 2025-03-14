@@ -1,4 +1,4 @@
-# SPAC - Cereal API
+# SPAC - Cereal API - Week 3
 A REST API serving information on cereals - an exercise in CRUD, API auth and database management.
 
 This project is developed using 

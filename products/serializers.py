@@ -2,44 +2,11 @@ from rest_framework import serializers
 from products.models import Product, Manufacturer, ThermalType
 
 
-# Serializer class for all Manufacturer requests
-class ManufacturerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Manufacturer
-        fields = ["id", "url", "code"]
-
-
-# Serializer class for all ThermalType requests
-class ThermalTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ThermalType
-        fields = ["id", "url", "code"]
-
-
 # Serializer class for Product GET requests
 class ProductReadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Product
-        fields = [
-            "id",
-            "url",
-            "name",
-            "mfr",
-            "thermal_type",
-            "calories",
-            "protein",
-            "fat",
-            "sodium",
-            "fiber",
-            "carbo",
-            "sugars",
-            "potass",
-            "vitamins",
-            "shelf",
-            "weight",
-            "cups",
-            "rating",
-        ]
+        fields = "__all__"
         depth = 1
 
 
@@ -82,3 +49,17 @@ class ProductWriteSerializer(serializers.HyperlinkedModelSerializer):
             "cups",
             "rating",
         ]
+
+
+# Serializer class for all Manufacturer requests
+class ManufacturerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Manufacturer
+        fields = "__all__"
+
+
+# Serializer class for all ThermalType requests
+class ThermalTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ThermalType
+        fields = "__all__"
