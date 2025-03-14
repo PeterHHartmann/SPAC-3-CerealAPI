@@ -1,7 +1,10 @@
 from django.core.management.base import BaseCommand
 import pandas
-from cereal_api.models import Cereal, Manufacturer, ThermalType
+from products.models import Product, Manufacturer, ThermalType
 from django.db.utils import IntegrityError
+
+# This is a custom command for populating the database with existing data from delivered CSV files.
+# This command is only meant to be run on the initialization of the API.
 
 
 class Command(BaseCommand):
@@ -37,7 +40,7 @@ class Command(BaseCommand):
             thermaltype = ThermalType.objects.get(code=thermal_type_code)
 
             try:
-                Cereal.objects.create(
+                product = Product.objects.create(
                     name=name,
                     mfr=manufacturer,
                     thermal_type=thermaltype,
@@ -55,7 +58,8 @@ class Command(BaseCommand):
                     cups=cups,
                     rating=rating,
                 )
+                self.stdout.write(f"Inserted new Product: {product.name}")
             except IntegrityError:
-                self.stderr.write(f"Skipping - Cereal: {name} already exists")
+                self.stderr.write(f"Skipping - Product: {name} already exists")
             except Exception as e:
                 self.stderr.write(f"Something went wrong: {e}")

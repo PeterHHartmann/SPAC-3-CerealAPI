@@ -6,12 +6,12 @@ from django.db.models import (
     UUIDField,
     ForeignKey,
     IntegerField,
-    OneToOneField,
     CASCADE,
-    PositiveIntegerField,
     FloatField,
 )
-from django.core.validators import MaxValueValidator, MinValueValidator
+
+# In this file all database models for Products API is defined.
+# This functions as a schema for the tables of the database where constraints etc. are defined
 
 
 class Manufacturer(Model):
@@ -49,12 +49,11 @@ class ThermalType(Model):
     )
 
     def __str__(self):
-        # name = [thermal_code for thermal_code, _ in ThermalType.ThermalChoices.choices if thermal_code = self.code]
         self.ThermalChoices.choices
         return self.code
 
 
-class Cereal(Model):
+class Product(Model):
     id = UUIDField(primary_key=True, default=uuid4, editable=False)
     name = CharField(max_length=255, unique=True, null=False)
     mfr = ForeignKey(Manufacturer, on_delete=CASCADE, null=False, editable=True)
