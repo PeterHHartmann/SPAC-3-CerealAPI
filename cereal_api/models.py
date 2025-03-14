@@ -45,7 +45,7 @@ class ThermalType(Model):
         choices=ThermalChoices.choices,
         default=ThermalChoices.COLD,
         unique=True,
-        null=False
+        null=False,
     )
 
     def __str__(self):
