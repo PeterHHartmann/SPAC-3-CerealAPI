@@ -12,10 +12,10 @@ class Command(BaseCommand):
         for mfr_code, _ in Manufacturer.ManufacturerChoices.choices:
             try:
                 Manufacturer.objects.create(code=mfr_code)
-                self.stdout.write(f"Inserted new Manufacturer code: {mfr_code}")
+                self.stdout.write(f"Inserted new Manufacturer: {mfr_code}")
             except IntegrityError:
                 self.stderr.write(
-                    f"Didn't new Manufacturer code: {mfr_code} - Already exists"
+                    f"Didn't insert new Manufacturer: {mfr_code} - Already exists"
                 )
             except:
                 self.stderr.write("Something went wrong")
